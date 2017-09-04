@@ -60,9 +60,9 @@
 (function (/* 03. pow (b, e) */) {
 	
   var pow = function( b, e ) {
-    return b === 1
-      ? 1
-      : pow( b, e - 1 ) * b;
+    return e < 2
+      ? b
+      : b * pow( b, e - 1 );
   };
 
   console.log (
@@ -79,15 +79,13 @@
 
 (function (/* 04. even (n) & odd (n) */) {
 	
-  var even = function( n ) {
-    return n === 0
-      ? true
-      : odd( n-1 );
+  var even = function (n) {
+    return n === 0 ? true  :
+           n === 1 ? false : odd (n-1);
   };
-  var odd = function( n ) {
-    return n === 0
-      ? false
-      : even( n-1 );
+  var odd = function (n) {
+    return n === 0 ? false :
+           n === 1 ? true  : even (n-1);
   };
   
   console.log (
@@ -106,7 +104,7 @@
   var addUp = function ( n ) {
     return n === 1
       ? 1
-      : addUp( n-1 ) + n;
+      : n + addUp( n-1 );
   };
 
   console.log (
@@ -124,7 +122,7 @@
   var digits = function ( n ) {
     return n <= 9
       ? n
-      : digits( n / 10 | 0 ) + n % 10;
+      : n % 10 + digits( n / 10 | 0 );
   };
 
   console.log (
