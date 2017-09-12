@@ -159,12 +159,24 @@
 
 (function (/* 06. sortV (v) */) {
     
-    var insertV = function (v, e) {
-
+    var insertV = function ( v, e ) {
+        return insertVAux( v, e, 0, [] );
     };
 
-    var sortV = function (v) {
+    var insertVAux = function( v, e, p, a ) {
+        return p > v.length - 1
+            && a.concat( e )
+            || v[p] < e
+            && insertVAux( v, e, p+1, a.concat( v[p] ) )
+            || insertVAux( v, v[p], p+1, a.concat( e ) );
+    };
 
+    var sortV = function ( v ) {
+        return (function sortVAux( v, p, a ) {
+            return p > v.length - 1
+                && a
+                || sortVAux( v, p+1, insertV( a, v[p] ) )
+        })(v, 0, []);
     };
     
     console.log (
